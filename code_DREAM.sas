@@ -1,34 +1,24 @@
 /***************************************************************************************************************************************
-* Title: DREAM cohort : (Pediatric) Parental psychological resilience improves the prognosis of pediatric atopic dermatitis
-* [MD] KimJH, KimJW
-* [STAT]KimKA, ShimJS
+* Title: D cohort
 code by SJS
 ****************************************************************************************************************************************/
-libname trial 'C:\Users\Administrator\Desktop\Biostatistics work\20211224 (PD) KKA_SJS_KimJW_KimJH';
+libname trial 'C:\Users\Administrator\Desktop\Biostatistics work';
 
 
 *1. import dataset;
-proc import datafile = 'C:\Users\Administrator\Desktop\Biostatistics work\20211224 (PD) KKA_SJS_KimJW_KimJH\KimJW_DREAM_220418_STAT_220628'
+proc import datafile = 'C:\Users\Administrator\Desktop\Biostatistics work'
 	dbms = xlsx
 	out = trial.rawdataset0 replace;
 	sheet='dataset';
 run;
 
 *2. import coding book;
-proc import datafile ='C:\Users\Administrator\Desktop\Biostatistics work\20211224 (PD) KKA_SJS_KimJW_KimJH\KimJW_DREAM_220418_STAT_220628'
+proc import datafile ='C:\Users\Administrator\Desktop\Biostatistics work'
 		dbms = xlsx
 		out = trial.label_tot replace;
 		sheet = 'coding book';
 run;
 
-*check median;
-proc univariate data = trial.rawdataset;
-variable RISC_sum PHQ_sum STAI_sum;
-run;
-
-*median(RISC_sum): 65
-*median(PHQ_sum): 3
-*median(STAI_sum): 44;
 
 
 *create variables ;
@@ -387,7 +377,7 @@ run;
 
 data onefreq ;
 	set onefreq;
-	if find(table, 'Å×ÀÌºí')^=0 then varname =scan (table, 1, " "); 
+	if find(table, 'Ã…Ã—Ã€ÃŒÂºÃ­')^=0 then varname =scan (table, 1, " "); 
 	else varname = scan (table, 2, " ");*sas KORver.: scan(table,1," "), ENGver.: scan(table, 2, " ");
 run;
 
@@ -443,7 +433,7 @@ run;
 
 data missing;
 	set missing;
-	if find(table, 'Å×ÀÌºí')^=0 then varname =scan (table, 1, " "); 
+	if find(table, 'Ã…Ã—Ã€ÃŒÂºÃ­')^=0 then varname =scan (table, 1, " "); 
 	else varname = scan (table, 2, " ");*sas KORver.: scan(table,1," "), ENGver.: scan(table, 2, " ");
 	array varcat $ &varlist_cat;
 		do i = 1 to dim (varcat);
